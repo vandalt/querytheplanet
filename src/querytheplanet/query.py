@@ -123,7 +123,7 @@ def fetch_available_planets() -> list[str]:
     return planets.copy()
 
 
-def query_planet_location(
+def _query_planet_location(
     planet_name: str,
     date: Optional[str] = None,
 ) -> dict:
@@ -159,7 +159,9 @@ def query_planet_location(
 
 
 def query_planet_locations(
-    planets: list[str], dates: str | None = None, verbose: bool = False
+    planets: str | list[str],
+    dates: str | list[str] | None = None,
+    verbose: bool = False,
 ) -> pd.DataFrame:
     """Query planet location for multiple planets and dates.
 
@@ -179,7 +181,7 @@ def query_planet_locations(
     all_results = []
     for planet in planets:
         for date in dates:
-            results = query_planet_location(planet, date=date)
+            results = _query_planet_location(planet, date=date)
             if verbose:
                 print(f"\n--- Planet Location Results: {planet} on {date} ---")
                 print(f"RA: {results['RA']} +/- {results['RA_err']} mas")

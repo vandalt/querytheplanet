@@ -17,6 +17,26 @@ Install directly from PyPI:
 python -m pip install querytheplanet
 ```
 
+### Installing for development
+
+To install for development, first clone the repository (or ideally your fork of it), e.g.:
+
+```bash
+git clone https://github.com/vandalt/querytheplanet.git
+```
+
+Then install with development dependencies in editable mode:
+
+```bash
+python -m pip install -e ".[dev]"
+```
+
+To run the tests, do:
+
+```bash
+python -m pytest
+```
+
 ## Usage
 
 ### Command line
@@ -60,23 +80,24 @@ querytheplanet -h
 ### From Python
 
 
+The main functionality is accessible from the `querytheplanet` module directly.
+Here is a small script with examples:
 
-## Development
+```python
+import querytheplanet as qtp
 
-To install for development, first clone the repository (or ideally your fork of it), e.g.:
+# Get a list of available planets that can be used in queries
+all_planets = qtp.fetch_available_planets()
 
-```bash
-git clone https://github.com/vandalt/querytheplanet.git
+# Query a single planet's location for today
+pos_df = query_planet_locations("51erib")
+
+# Query for another date
+pos_df_date =query_planet_locations("51erib", date="2025-01-01")
+
+# Query multiple planets and multiple dates
+pos_df_multi = query_planet_locations(["51erib", "betapicb"], date=["2025-01-01", "2026-05-01"])
 ```
 
-Then install with development dependencies in editable mode:
-
-```bash
-python -m pip install -e ".[dev]"
-```
-
-To run the tests, do:
-
-```bash
-python -m pytest
-```
+The query outputs are always returned as pandas Dataframes.
+To print the outputs in a more readable format, pass `verbose=True` to `query_planet_locations()`.
