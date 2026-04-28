@@ -61,22 +61,22 @@ def _parse_results_with_errors(html: str) -> dict:
         for line in text.split("\n"):
             line = line.strip()
             if "RA Offset" in line:
-                match = re.search(r"([\d.]+)\s+\+/-\s+([\d.]+)", line)
+                match = re.search(r"(-?[\d.]+)\s+\+/-\s+([\d.]+)", line)
                 if match:
                     results["RA"] = float(match.group(1))
                     results["RA_err"] = float(match.group(2))
             elif "Dec Offset" in line:
-                match = re.search(r"([\d.]+)\s+\+/-\s+([\d.]+)", line)
+                match = re.search(r"(-?[\d.]+)\s+\+/-\s+([\d.]+)", line)
                 if match:
                     results["Dec"] = float(match.group(1))
                     results["Dec_err"] = float(match.group(2))
             elif "Separation" in line and "=" in line:
-                match = re.search(r"([\d.]+)\s+\+/-\s+([\d.]+)", line)
+                match = re.search(r"(-?[\d.]+)\s+\+/-\s+([\d.]+)", line)
                 if match:
                     results["Separation"] = float(match.group(1))
                     results["Separation_err"] = float(match.group(2))
             elif line.startswith("PA ") and "=" in line:
-                match = re.search(r"([\d.]+)\s+\+/-\s+([\d.]+)", line)
+                match = re.search(r"(-?[\d.]+)\s+\+/-\s+([\d.]+)", line)
                 if match:
                     results["PA"] = float(match.group(1))
                     results["PA_err"] = float(match.group(2))

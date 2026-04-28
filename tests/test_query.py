@@ -81,6 +81,25 @@ def test_query_planet_locations(planets, dates):
             assert df[col].dtype == "str"
 
 
+def test_planet_location_values():
+    # manually fetched  from the website for hd206893c on 2022-10-26
+    ref_pos = {
+        "RA": -1.312,
+        "RA_err": 1.033,
+        "Dec": -90.362,
+        "Dec_err": 1.421,
+        "Separation": 90.363,
+        "Separation_err": 1.427,
+        "PA": 180.833,
+        "PA_err": 0.650,
+    }
+    pos = query._query_planet_location("hd206893c", "2022-10-26")
+    for col in POS_COLS:
+        err_col = f"{col}_err"
+        diff_err = np.sqrt(ref_pos[err_col] ** 2 + pos[err_col] ** 2)
+        diff = ref_pos[col] - pos[col]
+        assert (np.abs(diff) < diff_err).all(), f"Poistion {pos[col]} not equal to reference {ref_pos[col]} within precision limit {diff_err}"
+
 @pytest.mark.parametrize("planet", PLANETS)
 def test_query_planet_location(planet):
     result = query._query_planet_location(planet, None)
