@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "querytheplanet"
+description = "Query whereistheplanet.com from Python"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dynamic = ["version"]
+authors = [{ name = "Thomas Vandal", email = "thomas.vandal@umontreal.ca" }]
+dependencies = ["pandas", "requests", "beautifulsoup4"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/vandalt/querytheplanet"
+Repository = "https://github.com/vandalt/querytheplanet"
+"Bug Tracker" = "https://github.com/vandalt/querytheplanet/issues"
+
+[project.scripts]
+querytheplanet = "querytheplanet.cli:main"
+
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/querytheplanet/_version.py"
