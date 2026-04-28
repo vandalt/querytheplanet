@@ -1,6 +1,6 @@
 # Query the Planet
 
-Query <whereistheplanet.com> from Python.
+Query <http://whereistheplanet.com> from Python.
 
 There is already [a Python version of whereistheplanet](https://github.com/semaphoreP/whereistheplanet),
 but it is requires orbitize! and `git-lfs`, plus it is not available on PyPI.
