@@ -79,7 +79,6 @@ querytheplanet -h
 
 ### From Python
 
-
 The main functionality is accessible from the `querytheplanet` module directly.
 Here is a small script with examples:
 
@@ -101,3 +100,13 @@ pos_df_multi = query_planet_locations(["51erib", "betapicb"], date=["2025-01-01"
 
 The query outputs are always returned as pandas Dataframes.
 To print the outputs in a more readable format, pass `verbose=True` to `query_planet_locations()`.
+
+## Attributions
+
+This is a thin wrapper that calls <http://whereistheplanet.com>, maintained here: <https://github.com/semaphoreP/whereistheplanet>.
+
+If you used this for your research, please cite the [ASCL entry](https://ascl.net/2101.003) of it:
+
+```text
+Wang, J. J., Kulikauskas, M., Blunt, S. 2021, Astrophysics Source Code Library, ascl:2101.003
+```
